@@ -1,4 +1,5 @@
 require "../lib/discordcr/src/discordcr"
+require "../lib/dotenv/src/dotenv"
 require "json"
 
 module Kabane::Crystal
@@ -6,7 +7,8 @@ module Kabane::Crystal
 
 end
 
-client = Discord::Client.new(token: "Bot ODI4MjA0OTQ5NDEzODIyNDg0.YGmL9w.CkS2GCW8tLIgX-TWXKhSSVdJ50Y")
+envs = Dotenv.load(".env")
+client = Discord::Client.new(token: "Bot #{envs["TOKEN"]}")
 client.cache = Discord::Cache.new(client)
 
 client.on_message_create do |payload|
